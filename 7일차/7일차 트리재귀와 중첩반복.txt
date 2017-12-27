@@ -1,0 +1,44 @@
+1.피보나찌 수열
+-base-
+def fib(n):
+    if n>1:
+	return fib(n-1) + fib(n-2)
+    else:
+	return n	#1일땐 1나오고 0일땐 0나오게됨.
+print(fib(10))
+
+=> 나무 가지처럼 호출의 갯수가 2배씩 증가.
+    => 작업속도 느려짐
+
+-꼬리재귀 함수-
+def fibtail(n):
+    def loop(k,old,new):
+	if k<n:
+	    return loop(n+1,new,old+new)
+	else:    #k == n
+	    return new
+    return loop(1,1,0)
+
+-while문-
+def fib_while(n):
+    k = 1
+    old,new = 0,1
+    while k<n:
+	k+=1
+	old,new = new,old+new
+    return new
+
+<<<<<<<<<<리스트 메소드>>>>>>>>>>>>>>
+
+L.append(n) : L의 맨 뒤에 n을 추가한다.
+L.insert(i,n): ㅣ의 위치번호 i에 n을 삽입한다.
+L.remove(n): L에서 처음으로 나타나는 원소 n을 제거한다.
+--->>ValueError : 제거하려는 n이 없을때 실행오류로 발생
+L.index(n) : L에서 원소 n이 처음 나오는 위치번호를 내준다.
+--->>ValueError : 원소 n이 L에 없으면 실행오류로 발생
+L.reverse() : L을 앞뒤가 거꾸로 되게 뒤집는다.
+L.sort() : L을 오름차순으로 정렬한다.
+L.sort(reverse=True) : L을 내림차순으로 정렬한다.
+L.pop(i) : L에서 i에 위치한 원소를 내주고, 그원소를 L에서 제거한다.
+--->> -len(L)<=i<=len(L)-1 사이에 위치해야됨.
+L.count(n) : L에 있ㄴㄴ 원소n의 갯수를 세준다.

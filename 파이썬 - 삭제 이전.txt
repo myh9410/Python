@@ -1,0 +1,144 @@
+print '동전합산 서비스에 오심을 환영합니다.'
+
+coin500 = raw_input('500원짜리는 몇개입니까?')
+while not coin500.isdigit() : 
+    print '다시 입력하세요'
+    coin500 = raw_input('500원짜리는 몇개입니까?')
+if 'coin500' >= 0 : 
+    coin100 = raw_input('100원짜리는 몇개입니까?')
+while not coin100.isdigit() : 
+    print '다시 입력하세요'
+    coin100 = raw_input('100원짜리는 몇개입니까?')
+if 'coin100' >= 0 : 
+    coin50 = raw_input('50원짜리는 몇개입니까?')
+while not coin50.isdigit() : 
+    print '다시 입력하세요'
+    coin50 = raw_input('50원짜리는 몇개입니까?')
+if 'coin 50' >= 0 : 
+    coin10 = raw_input('10원짜리는 몇개입니까?')
+while not coin10.isdigit() : 
+    print '다시 입력하세요'
+    coin10 = raw_input('10원짜리는 몇개입니까?')
+
+if 'coin500' and 'coin100' and 'coin50' and 'coin10' >= 0 : 
+    total = 500*int(coin500)+ 100*int(coin100) + 50*int(coin50) + 10*int(coin10)
+
+print "\n손님의 동전은 총 ", total, "원 입니다"
+print "저희 서비스를 이용해주셔서 감사합니다"
+print "또들러주세요."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print "대출 상환금 계산 서비스에 오심을 환영합니다."
+p=raw_input('대출원금이 얼마인가요?(백만이상)')
+while int(p)<1000000 : 
+    print '100만원이상으로 다시 입력하세요.'
+    p=raw_input('대출원금이 얼마인가요?(백만이상)')
+while not p.isdigit() : 
+    print '다시입력하세요.'
+    p=raw_input('대출원금이 얼마인가요?(백만이상)')
+
+################################################################################
+y=raw_input('상환기간은 몇년인가요?(1년이상 연단위)')
+while not y.isdigit() : 
+    print '다시입력하세요'
+    y=raw_input('상환기간은 몇년인가요?(1년이상 연단위)')
+while int(y)<float(1) : 
+    print '다시입력하세요'
+    y=raw_input('상환기간은 몇년인가요?(1년이상 연단위)')
+################################################################################
+r=raw_input('이자율은 몇%인가요?(0~100)')
+while not r.isdigit() or int(r)>100 : 
+    print '다시입력하세요'
+    r=raw_input('이자율은 몇%인가요?(0~100)')
+triple = r.partition(".")
+if triple[0].isdigit() and triple[1] == "." and triple[2].isdigit() : 
+    print float(r)
+
+################################################################################
+d = (1+int(r))^int(y)*int(p)*int(r)/((1+int(r))^int(y)-1)
+m = int(d)/12
+x = int(y)*int(d)
+print '대출상환금 내역을 알려드리겠습니다.'
+print '대출원금은 ",p,"원입니다.'
+print '연이자율 ",r,%"로 y년동안 상환'
+print '1년에 한번씩 상환하시면 매년 d 원씩 지불하셔야 합니다.'
+print '1달에 한번씩 상환하시면 매월 m 원씩 지불하셔야 합니다.'
+print '상환완료시까지 총 상환금액은 x 원 입니다.'
+print '저희 서비스를 이용해주셔서 감사합니다.'
+print '또 들려주세요.'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print "대출 상환금 계산 서비스에 오심을 환영합니다."
+p=raw_input('대출원금이 얼마인가요?(백만이상)')
+while int(p)<1000000 : 
+    print '100만원이상으로 다시 입력하세요.'
+    p=raw_input('대출원금이 얼마인가요?(백만이상)')
+while not p.isdigit() : 
+    print '다시입력하세요.'
+    p=raw_input('대출원금이 얼마인가요?(백만이상)')
+
+################################################################################
+y=raw_input('상환기간은 몇년인가요?(1년이상 연단위)')
+while not y.isdigit() : 
+    print '다시입력하세요'
+    y=raw_input('상환기간은 몇년인가요?(1년이상 연단위)')
+while int(y)<float(1) : 
+    print '다시입력하세요'
+    y=raw_input('상환기간은 몇년인가요?(1년이상 연단위)')
+################################################################################
+r=raw_input('이자율은 몇%인가요?(0~100)')
+while not r.isdigit() or int(r)>100 : 
+    print '다시입력하세요'
+    r=raw_input('이자율은 몇%인가요?(0~100)')
+t = r.partition(".")
+not((t[0].isdigit() and t[2].isdigit() or t[0].isdigit() and t[2] == "" or t[0] == "" and t[2].isdigit() or r.isdigit()) and 0<= float(r) <= 100) 
+#    print float(r)
+
+################################################################################
+d = (1+int(r))^int(y)*int(p)*int(r)/((1+int(r))^int(y)-1)
+m = int(d)/12
+x = int(y)*int(d)
+print '대출상환금 내역을 알려드리겠습니다.'
+print '대출원금은 ",p,"원입니다.'
+print '연이자율 ",r,%"로 y년동안 상환'
+print '1년에 한번씩 상환하시면 매년 d 원씩 지불하셔야 합니다.'
+print '1달에 한번씩 상환하시면 매월 m 원씩 지불하셔야 합니다.'
+print '상환완료시까지 총 상환금액은 x 원 입니다.'
+print '저희 서비스를 이용해주셔서 감사합니다.'
+print '또 들려주세요.'
+
+

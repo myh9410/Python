@@ -1,0 +1,12 @@
+def find_second(filename,key) :
+    infile = open(filename,"r")
+    outfile = open("result.txt","w")
+    text = infile.read()
+    pos = text.find(key)
+    pos = text.find(key,pos+1)
+    outfile.write(key + "의 위치번호는 " + str(pos) + "\n")
+    infile.close()
+    outfile.close()
+    print("done")
+find_second("article.txt","컴퓨터")
+find_second("article.txt","한양대")

@@ -1,0 +1,164 @@
+2014/10/02
+
+제어구조
+
+재귀[Recursion(반복)]
+귀납법(Induction)
+자연수 : 0은 자연수이다.
+	n이 자연수일때, n+1은 자연수이다.
+
+[사례 1]
+import time
+
+def countdown(n) : 
+    if n == 0 : 
+	print("발사!")
+    else : 
+	print(n)
+	time.sleep(1)
+	countdown(n-1)
+
+countdown(5)
+
+결과
+>>5
+4
+3
+2
+1
+발사!
+
+[사례1 - while문 이용]
+import time
+
+def countdown(n) :                 while문 : 상향식으로 프로그래밍하는것
+    while n > 0 : 
+	print(n)
+	time.sleep(1)
+    print("발사!")
+
+    위 아래 비교
+
+def countdown(n) : 		   recursion : 하향식으로 프로그래밍하는것
+    if n > 0 : 
+	print(n)
+	time.sleep(1)
+	countdown(n-1)
+    else : 
+	print("발사!")
+
+[사례2]
+def summation(n) : 
+    if n > 0 : 
+	return summation(n-1) + n
+    else : 
+	return 0 
+
+print(summation(50))
+
+결과
+>> 1275
+
+##maximum recursion depth excceeded in comparison : 재귀함수 한계를 초과함.
+>> 그때 그때 계산한 값을 바로 더해버리면 오류가 생기지 않음
+
+[사례2 - 오류생기지 않도록 바로 더해버림]
+def summation(n) : 
+    def loop(n,sum) : 
+	if n> 0 : 
+	    return loop(n-1,sum + n)
+	else : 
+	    return sum
+    return loop(n,0)
+
+[사례2 - while문 이용]
+def summation(n) : 
+    sum = 0
+    while n > 0 : 
+	sum = sum + n 
+	n = n-1
+    return sum
+
+[사례3]
+def exp(b,n)
+    if n> 0 : 
+	return b * exp(b,n-1)
+    else : 
+	return 1
+
+print(exp(2,5))
+결과
+>>32
+
+[사례3 - 오류생기지 않도록 바로 더해버림]
+def exp(b,n) : 
+    def loop(b,n,prod) : 
+	if n > 0 :
+	    return loop(b,n-1,prod*b)
+	else : 
+	    return prod
+    return loop(b,n,1)
+
+print(exp(2,5))
+
+   아래와 같이 함수를 써도 상관 X
+
+def exp(b,n) : 
+    def loop(n,prod) : 
+	if n > 0 :
+	    return loop(n-1,prod*b)
+	else : 
+	    return prod
+    return loop(n,1)
+
+print(exp(2,5))
+
+def exp(b,n) : 
+    prod = 1
+    while n > 0 : 
+        n = n-1
+        prid = prod * b
+    return prod
+
+print(exp(2,5))
+
+[사례3 - 계산속도 향상]
+
+def exp(b,n)
+    if n > 0 : 
+	if n % 2 == 0                      (n을 2로나눈 나머지가 0(짝수))
+	    return exp(b,n//2)**2          (// : 정수의 나눗셈)
+	else : 
+	    return b * exp(b,n-1)
+    else : 
+	return 1
+
+print(exp(2,5))
+
+[사례3 - 계산속도향상,오류생기지 않도록 바로 더해버림]
+
+def exp(b,n)
+    def loop(n,prod) : 
+	if n > 0 : 
+	    if n % 2 == 0                      
+	        return loop(b**2,n//2,prod)         
+	    else : 
+	        return loop(b,n-1,prod * b)
+        else : 
+	    return prod
+    return loop(b,n,1)
+print(exp(2,5))
+
+[사례3 - while문 이용]
+def exp(b,n) : 
+    prod = 1
+    while n > 0 : 
+	if n%2 == 0 : 
+	    b = b**2
+    	    n = n//2
+	else : 
+	    n = n - 1
+	    prod = prod * b
+    return prod
+
+

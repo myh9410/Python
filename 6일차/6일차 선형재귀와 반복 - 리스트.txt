@@ -1,0 +1,188 @@
+리스트(List) - 데이터의 나열(수정가능)
+	대괄호로 둘러싼다.
+정수를 담아놓은 메모리 셋의 리스트. == 다른 언어에서는 '배열'이라 부름.
+
+
+튜플(Tuple) - 데이터의 나열(수정불가능)
+
+정수범위(Range)
+
+
+
+'진짜'리스트 - "정수"리스트
+(기초) nil - 비어있는 리스트
+(귀납) xs - 리스트이면, cons(x,xs)는 리스트이다.
+
+
+시퀀스
+리스트 = "nil" or "cons"
+
+nil = []
+def cons(x,xs) : return [x] + xs
+
+cons(3,,nil)
+>>[3]
+
+cons(3,cons(2,nil))
+>>[3,2]
+
+cons(3,cons(2,cons(5,nil)))
+>>[3,2,5]
+
+ns = cons(3,cons(2,cons(5,cons(4,nil))))
+ns
+>>[3,2,5,4]
+
+ns[2]
+>>5
+
+def head(xs) : return xs[0]
+def tail(xs) : return xs[1:]
+head(tail(tail(ns)))
+>>5
+
+def null(xs) : return xs == nil --------nil의 여부 알려줌
+####################################################################################
+Ex)1 리스트 길이 구하기
+ns = cons(3,cons(2,cons(5,cons(4,nil))))
+def length(xs) : 
+    if not null(xs) : 
+        return length(tail(xs)) + 1
+    else : 
+        return 0
+
+print(length(ns))
+
+>>4
+
+Ex)1 - 꼬리재귀함수
+def length(xs) : 
+    def loop(xs,len) :    
+	if not null(xs) : 
+            return loop(tail(xs),len+1)
+    else : 
+        return len
+    return loop(xs,0)
+
+print(length(ns))
+>>4
+Ex)1 - while문으로 변환
+def length(xs) : 
+    len = 0
+    while not null(xs) : 
+	xs = tail(xs)
+	len = len + 1
+    return len
+
+
+실행추적
+length(cons(3,cons(2,cons(5,cons(4,nil)))))
+=>length(cons(2,cons(5,cons(4,nil)))) + 1
+=>length(cons(5,cons(4,nil))) + 1 + 1
+=>length(cons(4,nil)) + 1 + 1 + 1
+=>length(nil) + 1 + 1 + 1 + 1
+=>0 + 1 + 1 + 1 + 1 = 4
+
+실행추적(꼬리재귀함수)
+length(cons(3,cons(2,cons(5,cons(4,nil)))))
+=>loop(cons(3,cons(2,cons(5,cons(4,nil)))),0)
+=>loop(cons(2,cons(5,cons(4,nil))),1)
+=>loop(cons(5,cons(4,nil)),2)
+=>loop(cons(4,nil)),3)
+=>loop(nil,4)
+=>4
+####################################################################################
+Ex)2 - 존재검사
+def exist(x,xs) : 
+    if not null(xs) : 
+	if x == head(xs) : 
+	    return True
+	else : 
+	    return exist(x,tail(xs))
+    else : 
+	return False
+	
+Ex)2 - while문으로 변환
+def exist(x,xs) : 
+    while not null(xs) : 
+	if x == head(xs) : 
+	    return True
+	else : 
+	    xs = tail(xs)
+    return False
+####################################################################################
+Ex)3 - 원소 개수 세기
+def count(x,xs) : 
+    if not null(xs) : 
+	if x == head(xs) : 
+	    return 1 + count(x,tail(xs))
+	else : 
+	    return count(x,tail(xs))
+    else : 
+	return 0
+
+Ex)3 - 꼬리재귀함수
+def count(x,xs) : 
+    def loop(x,xs,n) : 
+	if not null(xs) : 
+	    if x == head(xs) : 
+		return loop(x,tail(xs),n+1)
+            else : 
+	        return loop(x,tail(xs),n)
+        else : 
+	    return n
+    return loop(x,xs,0) 
+
+Ex)3 - while문 변환
+def count(x,xs) : 
+    n = 0
+    while not null(xs) : 
+	    if x == head(xs) : 
+		n = n+1
+	    xs = tail(xs)
+    return n
+####################################################################################
+concat : '진짜'리스트들을 서로 붙여줌
+def concat(xs,ys) : return xs + ys
+snoc
+def snoc(xs,x) : return xs + [x]
+Ex)4 - 원소 하나만 제거하기
+def remove_one(x,xs) : 
+    if not null(xs) : 
+	if x == head(xs) : 
+	    return xs
+	else : 
+	    return cons(head(xs),remove_one(x,xs))
+    else : 
+        return nil
+
+Ex)4 - 꼬리재귀함수
+def remove_one(x,xs) : 
+    def loop(xs,,rs) : 
+	if not null(xs) : 
+	    if x == head(xs) : 
+		return concat(rs,tail(xs))
+	    else : 
+		return loop(tail(xs),snoc(rs,head(xs)))
+	else : 
+	    return rs
+    return loop(xs,nil)
+
+Ex)4 - while문 변환
+def remove_one(x,xs) : 
+    rs = nil
+    while not null(xs) : 
+	if x == head(xs) : 
+	    return concat(rs,tail(xs))
+	else : 
+	    xs = tail(xs)
+	    rs = snoc(rs,head(xs))
+    return rs
+####################################################################################
+Ex)5 - 원소 모두 제거하기
+####################################################################################
+def isort(xs) : 
+    if not null(xs) : 
+	return insert(head(xs),isort(tail(xs)))
+    else : 
+	return nil
